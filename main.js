@@ -4,8 +4,15 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js'
 
 
 const scene = new THREE.Scene()
-const camera = new THREE.PerspectiveCamera(60, 1, 1, 10000)
-camera.position.set(0, 0, 500)
+const camera = new THREE.PerspectiveCamera(2, window.innerWidth / window.innerHeight, 100, 1000 )
+const helper = new THREE.CameraHelper( camera )
+scene.add(helper)
+camera.position.set(1, 1, 109)
+camera.rotation.set(0, 0.01, -0.9)
+
+//camera.zoom = 50
+
+
 
 
 const renderer = new THREE.WebGLRenderer()
@@ -13,9 +20,11 @@ renderer.setSize( window.innerWidth, window.innerHeight)
 document.getElementById('app').appendChild(renderer.domElement)
 
 
-var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-var light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
+
+var light = new THREE.DirectionalLight( 0xffffff, 1 );
+light.position.set(5, 5, 6)
+light.castShadow = true
 scene.add( light );
 
 
